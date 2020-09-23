@@ -5,9 +5,12 @@ const express = require('express'),
     bodyParser = require('body-parser'),
     dotenv = require('dotenv');
 
+// Routes
+const usersRouter = require('./routes/users');
+
 dotenv.config();
 
-// setup database
+// Base de donnée
 db = mysql.createConnection({
     host: process.env.DB_HOST,
     user: process.env.DB_USER,
@@ -15,14 +18,13 @@ db = mysql.createConnection({
     database: process.env.DB_NAME
 })
 
-// make server object that contain port property and the value for our server.
 var server = {
     port: process.env.PORT
 };
 
-// use the modules
+// Modules
 app.use(cors())
 app.use(bodyParser.json());
+app.use('/users', usersRouter);
 
-// starting the server
 app.listen( server.port , () => console.log(`Server started, listening port: ${server.port}`));
