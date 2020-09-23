@@ -1,0 +1,19 @@
+{
+  "name": "pyteach_back",
+  "version": "1.0.0",
+  "description": "PyTeach Server",
+  "main": "app.js",
+  "scripts": {
+    "test": "node app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Malha3/PyteachBack.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Malha3/PyteachBack/issues"
+  },
+  "homepage": "https://github.com/Malha3/PyteachBack#readme"
+}
