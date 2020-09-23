@@ -1,31 +1,23 @@
-const express = require('express'),
-    app = express(),
-    mysql = require('mysql'), // import mysql module
-    cors = require('cors'),
-    bodyParser = require('body-parser'),
-    dotenv = require('dotenv');
-
-// Routes
-const usersRouter = require('./routes/users');
+require('rootpath')();
+const express = require('express');
+const app = express();
+const cors = require('cors');
+const bodyParser = require('body-parser');
+const errorHandler = require('_middleware/error-handler');
+const dotenv = require('dotenv');
 
 dotenv.config();
 
-// Base de donnée
-db = mysql.createConnection({
-    host: process.env.DB_HOST,
-    user: process.env.DB_USER,
-    password: process.env.DB_PASS,
-    database: process.env.DB_NAME,
-    port: process.env.DB_PORT
-})
-
-var server = {
-    port: process.env.PORT
-};
-
-// Modules
-app.use(cors())
+app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
-app.use('/users', usersRouter);
+app.use(cors());
 
-app.listen( server.port , () => console.log(`Server started, listening port: ${server.port}`));
+// api routes
+app.use('/users', require('./routes/users/user.controller'));
+
+// global error handler
+app.use(errorHandler);
+
+// start server
+const port = process.env.NODE_ENV === 'production' ? (process.env.PORT || 80) : process.env.PORT;
+app.listen(port, () => console.log('Server listening on port ' + port));
