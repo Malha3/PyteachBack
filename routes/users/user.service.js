@@ -1,7 +1,7 @@
 const config = require('config.json');
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
-const db = require('_helpers/db');
+const db = require('models/');
 
 module.exports = {
     authenticate,
@@ -35,6 +35,10 @@ async function create(params) {
     // validate
     if (await db.User.findOne({ where: { username: params.username } })) {
         throw 'Username "' + params.username + '" is already taken';
+    }
+
+    if (await db.User.findOne({ where: { email: params.email } })) {
+        throw 'email "' + params.email + '" is already taken';
     }
 
     // hash password
