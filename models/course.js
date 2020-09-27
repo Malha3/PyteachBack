@@ -11,6 +11,7 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       Course.belongsTo(models.Category, {
+        as: 'category',
         foreignKey: 'id_cat'
       });
       Course.belongsTo(models.User, {
@@ -19,6 +20,10 @@ module.exports = (sequelize, DataTypes) => {
       Course.belongsToMany(models.User, {
         through: 'CompletedCourses'
       });
+      Course.hasMany(models.Post, {
+        as: 'exercices',
+        foreignKey: 'id_course'
+      })
       // define association here
     }
   };

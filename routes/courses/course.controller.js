@@ -20,9 +20,10 @@ function courseSchema(req, res, next) {
         title: Joi.string().required(),
         description: Joi.string().required(),
         slug: Joi.string().required(),
-        authorid: Joi.string().required(),
+        author_id: Joi.string().required(),
         tags: Joi.string().optional(),
-        published: Joi.boolean().required()
+        published: Joi.boolean().required(),
+        id_cat: Joi.string().required()
     });
     validateRequest(req, next, schema);
 }

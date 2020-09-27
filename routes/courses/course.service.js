@@ -23,6 +23,10 @@ async function create(params) {
         throw 'Course "' + params.title + '" arleady exists';
     }
 
+    if (await db.Course.findOne({ where: { slug: params.slug } })) {
+        throw 'Course slug "' + params.slug + '" arleady exists';
+    }
+
     await db.Course.create(params);
 }
 
