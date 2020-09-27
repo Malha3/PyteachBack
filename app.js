@@ -15,17 +15,15 @@ app.use(cors());
 
 // api routes
 app.use('/users', require('./routes/users/user.controller'));
+app.use('/categories', require('./routes/categories/category.controller'));
+app.use('/courses', require('./routes/courses/course.controller'));
+
 // global error handler
 app.use(errorHandler);
 
-
-//db.sequelize.sync({ force: true }).then(() => {
-//    console.log("Drop and re-sync db.");
-//});
-
-db.sequelize.sync().then(() => {
-    console.log("Sync db");
-})
+db.sequelize.sync({ force: true }).then(() => {
+   console.log("Drop and re-sync db.");
+});
 
 // start server
 const port = process.env.NODE_ENV === 'production' ? (process.env.PORT || 80) : process.env.PORT;
