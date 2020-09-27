@@ -40,7 +40,7 @@ function updateSchema(req, res, next) {
         imageUrl: Joi.string().empty(''),
         videoUrl: Joi.string().empty(''),
         isPublished: Joi.boolean().empty(''),
-        isExercice: Joi.boolean().empty(''),
+        isExercice: Joi.boolean().empty('')
     });
     validateRequest(req, next, schema);
 }

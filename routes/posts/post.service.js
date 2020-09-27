@@ -31,7 +31,30 @@ async function create(params) {
 }
 
 async function update(id, params) {
-    //TODO : Update Post
+    const post = await getPost(id);
+
+    // Verifications doublons
+    const titleChanged = params.title && post.title !== params.title;
+    const idCourseChanged = params.id_course && post.id_course !== parseInt(params.id_course);
+    const posChanged = params.position && post.position !== parseInt(params.position);
+
+    if(!titleChanged) params.title = post.title;
+    if(!idCourseChanged) params.id_course = post.id_course;
+    if(!posChanged) params.position = post.position;
+
+    if ((titleChanged || idCourseChanged) && await db.Post.findOne({ where: { title: params.title, id_course : params.id_course } })) {
+        throw 'Post "'+ params.title +'" for Course "' + params.id_course + '" arleady exists';
+    }
+
+    if (posChanged && await db.Post.findOne({ where: { id_course: params.id_course, position: params.position } })) {
+        throw 'Post for Course "'+ params.id_course +'" in position "' + params.position + '" arleady exists';
+    }
+    // End verifications
+
+    Object.assign(post, params);
+    await post.save();
+
+    return post.get();
 }
 
 async function _delete(id) {

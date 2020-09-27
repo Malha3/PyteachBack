@@ -36,8 +36,6 @@ async function create(params) {
 }
 
 async function update(id, params) {
-    //TODO : Update Course
-
     const course = await getCourse(id);
 
     // Verifications doublons
@@ -50,7 +48,7 @@ async function update(id, params) {
     if (slugChanged && await db.Course.findOne({ where: { slug: params.slug } })) {
         throw 'Course slug "' + params.slug + '" arleady exists';
     }
-    // End vérifications
+    // End verifications
 
     Object.assign(course, params);
     await course.save();
