@@ -21,7 +21,7 @@ app.use('/courses', require('./routes/courses/course.controller'));
 // global error handler
 app.use(errorHandler);
 
-db.sequelize.sync({ force: true }).then(() => {
+db.sequelize.sync({ alter: true }).then(() => {
    console.log("Drop and re-sync db.");
 });
 
