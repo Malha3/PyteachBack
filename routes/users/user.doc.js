@@ -43,7 +43,7 @@
  */
 
 /**
- * @api {get} /users/ GetAll
+ * @api {get} /users/ Get All Users
  * @apiName GetAll
  * @apiGroup User
  * @apiHeader {String} JWT access token.
@@ -93,5 +93,30 @@
  * @apiParam {Number} id Users unique ID.
  *
  * @apiSuccess {String} message  Delete confirmation
+ *
+ */
+
+/**
+ * @api {put} /users/:id Update User
+ * @apiName Update User
+ * @apiGroup User
+ * @apiHeader {String} JWT access token.
+ *
+ * @apiParam {Number} id Users unique ID.
+ *
+ * @apiExample Example usage: Updating first and lastName
+ *     body:
+ *     {
+ *      "firstName": "Badis",
+ *      "lastName": "MEDDOURI"
+ *     }
+ *
+ *
+ * @apiSuccess {Int} id id of the User.
+ * @apiSuccess {String} firstName  Firstname of the User.
+ * @apiSuccess {String} lastName  Lastname of the User.
+ * @apiSuccess {String} username  username of the User.
+ * @apiSuccess {String} role  role of the User.
+ * @apiSuccess {String} email  Lastname of the User.
  *
  */
