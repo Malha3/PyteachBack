@@ -27,6 +27,34 @@ module.exports = (sequelize, DataTypes) => {
     title: {
       allowNull:false,
       type: DataTypes.STRING
+    },
+    description: {
+      allowNull: false,
+      type: DataTypes.STRING
+    },
+    body: {
+      allowNull: false,
+      type: DataTypes.STRING
+    },
+    position: {
+      allowNull: false,
+      type: DataTypes.INTEGER
+    },
+    imageUrl: {
+      allowNull: true,
+      type: DataTypes.STRING
+    },
+    videoUrl: {
+      allowNull: true,
+      type: DataTypes.STRING
+    },
+    isExercice: {
+      allowNull: true,
+      type: DataTypes.BOOLEAN
+    },
+    isPublished: {
+      allowNull: true,
+      type: DataTypes.BOOLEAN
     }
   }, {
     sequelize,
