@@ -1,5 +1,6 @@
 const bcrypt = require('bcryptjs');
 const db = require('models/');
+const slugify = require('_helpers/slugify')
 
 module.exports = {
     getAll,
@@ -19,6 +20,10 @@ async function getById(id) {
 
 async function create(params) {
 
+    if(!params.slug && params.title){
+        params.slug = slugify(params.title);
+    }
+
     if (await db.Course.findOne({ where: { title: params.title } })) {
         throw 'Course "' + params.title + '" arleady exists';
     }
@@ -31,24 +36,7 @@ async function create(params) {
 }
 
 async function update(id, params) {
-    const user = await getUser(id);
-
-    // validate
-    const usernameChanged = params.username && user.username !== params.username;
-    if (usernameChanged && await db.User.findOne({ where: { username: params.username } })) {
-        throw 'Username "' + params.username + '" is already taken';
-    }
-
-    // hash password if it was entered
-    if (params.password) {
-        params.hash = await bcrypt.hash(params.password, 10);
-    }
-
-    // copy params to user and save
-    Object.assign(user, params);
-    await user.save();
-
-    return omitHash(user.get());
+    //TODO : Update Course
 }
 
 async function _delete(id) {

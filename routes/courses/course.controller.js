@@ -19,7 +19,7 @@ function courseSchema(req, res, next) {
     const schema = Joi.object({
         title: Joi.string().required(),
         description: Joi.string().required(),
-        slug: Joi.string().required(),
+        slug: Joi.string().optional(),
         author_id: Joi.string().required(),
         tags: Joi.string().optional(),
         published: Joi.boolean().required(),
