@@ -30,10 +30,13 @@ function courseSchema(req, res, next) {
 
 function updateSchema(req, res, next) {
     const schema = Joi.object({
-        firstName: Joi.string().empty(''),
-        lastName: Joi.string().empty(''),
-        username: Joi.string().empty(''),
-        password: Joi.string().min(6).empty('')
+        title: Joi.string().empty(''),
+        description: Joi.string().empty(''),
+        slug: Joi.string().empty(''),
+        author_id: Joi.string().empty(''),
+        tags: Joi.string().empty(''),
+        published: Joi.boolean().empty(''),
+        id_cat: Joi.string().empty('')
     });
     validateRequest(req, next, schema);
 }

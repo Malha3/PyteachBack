@@ -37,6 +37,25 @@ async function create(params) {
 
 async function update(id, params) {
     //TODO : Update Course
+
+    const course = await getCourse(id);
+
+    // Verifications doublons
+    const titleChanged = params.title && course.title !== params.title;
+    if (titleChanged && await db.Course.findOne({ where: { title: params.title } })) {
+        throw 'Course title "' + params.title + '" arleady exists';
+    }
+
+    const slugChanged = params.slug && course.slug !== params.slug;
+    if (slugChanged && await db.Course.findOne({ where: { slug: params.slug } })) {
+        throw 'Course slug "' + params.slug + '" arleady exists';
+    }
+    // End vérifications
+
+    Object.assign(course, params);
+    await course.save();
+
+    return course.get();
 }
 
 async function _delete(id) {
