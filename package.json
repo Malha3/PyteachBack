@@ -31,5 +31,9 @@
   },
   "devDependencies": {
     "sequelize-cli": "^6.2.0"
+  },
+  "apidoc": {
+    "title": "PyTeach API Doc",
+    "url" : "https://localhost:4040"
   }
 }

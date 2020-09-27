@@ -84,9 +84,7 @@ To login : POST http://localhost:4040/users/login
 }
 ```
 ### CRUD Table
-
-# TODO !!!!
-
+Use apidoc command to generate the API Swagger : `apidoc -f "routes/.*\\.js$" -i ./  -o apidoc/`
 
 ## Auteurs
 

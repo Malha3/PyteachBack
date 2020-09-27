@@ -12,6 +12,7 @@ dotenv.config();
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(cors());
+app.use('/apidoc', express.static('apidoc'));
 
 // api routes
 app.use('/users', require('./routes/users/user.controller'));
