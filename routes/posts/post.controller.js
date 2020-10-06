@@ -6,7 +6,7 @@ const authorize = require('_middleware/authorize')
 const postService = require('./post.service');
 
 // routes
-router.post('/createOne', postSchema, createPost);
+router.post('/', postSchema, createPost);
 router.get('/', authorize(), getAll);
 router.get('/:id', authorize(), getById);
 router.put('/:id', authorize(), updateSchema, update);
@@ -48,7 +48,10 @@ function updateSchema(req, res, next) {
 // Actions //
 function createPost(req, res, next) {
     postService.create(req.body)
-        .then(() => res.json({ message: 'Post created successfully' }))
+        .then((post) => res.status(201).json({
+            id: post.id_post,
+            message: 'Article created successfully'
+        }))
         .catch(next);
 }
 

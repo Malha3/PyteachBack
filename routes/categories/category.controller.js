@@ -6,7 +6,7 @@ const authorize = require('_middleware/authorize')
 const categoryService = require('./category.service');
 
 // Routes (sécurisé par token)
-router.post('/createOne', authorize(), categorySchema, createCategory);
+router.post('/', authorize(), categorySchema, createCategory);
 router.get('/', authorize(), getAll);
 router.get('/:id', authorize(), getById);
 router.put('/:id', authorize(), updateSchema, update);
@@ -34,7 +34,10 @@ function updateSchema(req, res, next) {
 // Actions //
 function createCategory(req, res, next) {
     categoryService.create(req.body)
-        .then(() => res.json({ message: 'Category created successfully' }))
+        .then((category) => res.status(201).json({
+            id: category.id_cat,
+            message: 'Category created successfully'
+        }))
         .catch(next);
 }
 

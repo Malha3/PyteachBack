@@ -32,7 +32,7 @@ async function create(params) {
         throw 'Course slug "' + params.slug + '" arleady exists';
     }
 
-    await db.Course.create(params);
+    return db.Course.create(params);
 }
 
 async function update(id, params) {

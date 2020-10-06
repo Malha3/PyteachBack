@@ -27,7 +27,7 @@ async function create(params) {
         throw 'Post for Course "'+ params.id_course +'" in position "' + params.position + '" arleady exists';
     }
 
-    await db.Post.create(params);
+    return db.Post.create(params);
 }
 
 async function update(id, params) {

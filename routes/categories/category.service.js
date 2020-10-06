@@ -16,7 +16,7 @@ async function create(params) {
         throw 'Category title "' + params.title + '" already exists';
     }
 
-    await db.Category.create(params);
+    return db.Category.create(params);
 }
 
 async function update(id, params) {

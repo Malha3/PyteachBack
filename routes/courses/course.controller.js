@@ -6,7 +6,7 @@ const authorize = require('_middleware/authorize')
 const courseService = require('./course.service');
 
 // routes
-router.post('/createOne', courseSchema, createCourse);
+router.post('/', courseSchema, createCourse);
 router.get('/', authorize(), getAll);
 router.get('/:id', authorize(), getById);
 router.put('/:id', authorize(), updateSchema, update);
@@ -44,7 +44,9 @@ function updateSchema(req, res, next) {
 // Actions //
 function createCourse(req, res, next) {
     courseService.create(req.body)
-        .then(() => res.json({ message: 'Course created successfully' }))
+        .then((course) => res.status(201).json({
+            id: course.id_course,
+            message: 'Course created successfully' }))
         .catch(next);
 }
 

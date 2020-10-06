@@ -18,7 +18,7 @@ app.use('/apidoc', express.static('apidoc'));
 app.use('/users', require('./routes/users/user.controller'));
 app.use('/categories', require('./routes/categories/category.controller'));
 app.use('/courses', require('./routes/courses/course.controller'));
-app.use('/posts', require('./routes/posts/post.controller'));
+app.use('/articles', require('./routes/posts/post.controller'));
 
 // global error handler
 app.use(errorHandler);
