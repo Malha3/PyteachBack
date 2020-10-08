@@ -4,6 +4,7 @@ const slugify = require('_helpers/slugify')
 
 module.exports = {
     getAll,
+    getBySlug,
     getById,
     create,
     update,
@@ -16,6 +17,10 @@ async function getAll() {
 
 async function getById(id) {
     return await getCourse(id);
+}
+
+async function getBySlug(slug) {
+    return await getCourseBySlug(slug);
 }
 
 async function create(params) {
@@ -61,8 +66,18 @@ async function _delete(id) {
     await course.destroy();
 }
 
+async function getCourseBySlug(slug) {
+    const course = await db.Course.findOne({where: {slug: slug}});
+    if (!course) throw 'Course not found';
+    return course;
+}
+
 async function getCourse(id) {
-    const course = await db.Course.findByPk(id);
+    const course = await db.Course.findByPk(id, {
+        include: [{
+            model: db.User
+        }]
+    });
     if (!course) throw 'Course not found';
     return course;
 }
