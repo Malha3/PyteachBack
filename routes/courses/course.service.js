@@ -73,11 +73,7 @@ async function getCourseBySlug(slug) {
 }
 
 async function getCourse(id) {
-    const course = await db.Course.findByPk(id, {
-        include: [{
-            model: db.User
-        }]
-    });
+    const course = await db.Course.findByPk(id, { include: { all: true, nested: true }});
     if (!course) throw 'Course not found';
     return course;
 }
