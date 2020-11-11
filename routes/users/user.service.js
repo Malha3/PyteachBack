@@ -1,7 +1,8 @@
-const config = require('config.json');
+const config = require('config/config.json');
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
 const db = require('models/');
+const Role = require('_helpers/role');
 
 module.exports = {
     authenticate,
@@ -19,7 +20,7 @@ async function authenticate({ username, password }) {
         throw 'Username or password is incorrect';
 
     // authentication successful
-    const token = jwt.sign({ sub: user.id }, config.secret, { expiresIn: '7d' });
+    const token = jwt.sign({ sub: user.id, role: user.role }, config.secret, { expiresIn: '7d' });
     return { ...omitHash(user.get()), token };
 }
 

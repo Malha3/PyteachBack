@@ -4,7 +4,7 @@
     "password": "covid19",
     "database": "pyteach",
     "host": "127.0.0.1",
-    "port": "8889",
+    "port": "3306",
     "dialect": "mysql"
   },
   "test": {
@@ -20,5 +20,13 @@
     "database": "database_production",
     "host": "127.0.0.1",
     "dialect": "mysql"
-  }
+  },
+  "database": {
+    "host": "localhost",
+    "port": "3306",
+    "user": "pyteach_user",
+    "password": "covid19",
+    "database": "pyteach"
+  },
+  "secret": "696b7ae4-0bf7-40c9-a667-94eb2b2bf4c5-bf8bceae-1c54-494c-a6c6-a5fff76005e9"
 }
