@@ -15,7 +15,7 @@
  *           "isExercice": false
  *       }
  *
- * @apiSuccess {String} message  Creation confirmation.
+ * @apiSuccess (Success 201) {String} message  Creation confirmation.
  *
  */
 
