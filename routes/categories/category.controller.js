@@ -4,6 +4,7 @@ const Joi = require('joi');
 const validateRequest = require('_middleware/validate-request');
 const authorize = require('_middleware/authorize')
 const categoryService = require('./category.service');
+const category = require('../../models/category');
 
 // Routes (sécurisé par token)
 router.post('/', authorize(), categorySchema, createCategory);
@@ -62,6 +63,6 @@ function getAll(req, res, next) {
 
 function getById(req, res, next) {
     categoryService.getById(req.params.id)
-        .then(user => res.json(user))
+        .then(category => res.json(category))
         .catch(next);
 }

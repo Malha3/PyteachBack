@@ -42,7 +42,7 @@
  */
 
 /**
- * @api {get} /users/:id Request Post information
+ * @api {get} /posts/:id Request Post information
  * @apiName GetPost
  * @apiGroup Post
  * @apiHeader {String} JWT access token.

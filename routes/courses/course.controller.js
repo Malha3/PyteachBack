@@ -52,25 +52,25 @@ function createCourse(req, res, next) {
 
 function update(req, res, next) {
     courseService.update(req.params.id, req.body)
-        .then(category => res.json(category))
+        .then(course => res.json(course))
         .catch(next);
 }
 
 function _delete(req, res, next) {
     courseService.delete(req.params.id)
-        .then(() => res.json({ message: 'Category deleted successfully' }))
+        .then(() => res.json({ message: 'course deleted successfully' }))
         .catch(next);
 }
 
 // Getters //
 function getAll(req, res, next) {
     courseService.getAll()
-        .then(users => res.json(users))
+        .then(courses => res.json(courses))
         .catch(next);
 }
 
 function getById(req, res, next) {
     courseService.getById(req.params.id)
-        .then(user => res.json(user))
+        .then(course => res.json(course))
         .catch(next);
 }
