@@ -59,4 +59,5 @@
  * @apiSuccess {Boolean} isExercice  True if this Post is Exercice.
  * @apiSuccess {Boolean} isPublished  True if this post is Published, false if it's a draft.
  * @apiSuccess {Int} id_course  ID of course where this post belongs to.
+ *
  */
