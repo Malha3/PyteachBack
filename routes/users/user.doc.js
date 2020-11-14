@@ -38,7 +38,7 @@
  *     }
  *
  *
- * @apiSuccess {String} message  Registration successful confirmation
+ * @apiSuccess (Success 201) {String} message  Registration successful confirmation
  *
  */
 

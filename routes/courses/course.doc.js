@@ -17,7 +17,7 @@
  *     }
  *
  *
- * @apiSuccess {String} message  Course created successfully 
+ * @apiSuccess (Success 201) {String} message  Course created successfully 
  *
  */
 
