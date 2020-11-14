@@ -1,6 +1,6 @@
 /**
  * @api {post} /courses/ Create course
- * @apiName Create
+ * @apiName CreateCourse
  * @apiGroup Course
  *
  * @apiExample Example usage:
