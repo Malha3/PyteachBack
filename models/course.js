@@ -20,7 +20,7 @@ module.exports = (sequelize, DataTypes) => {
       Course.belongsToMany(models.User, {
         through: 'CompletedCourses'
       });
-      Course.hasMany(models.Post, {
+      Course.hasMany(models.Article, {
         as: 'exercices',
         foreignKey: 'id_course'
       })
