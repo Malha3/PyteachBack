@@ -17,7 +17,7 @@ async function authenticate({ username, password }) {
     const user = await db.User.scope('withHash').findOne({ where: { username } });
 
     if (!user || !(await bcrypt.compare(password, user.hash)))
-        throw 'Username or password is incorrect';
+        throw 'Nom d\'utilisateur ou mot de passe incorrect';
 
     // authentication successful
     const token = jwt.sign({ sub: user.id, role: user.role }, config.secret, { expiresIn: '7d' });

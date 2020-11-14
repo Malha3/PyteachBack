@@ -36,7 +36,7 @@ function createCategory(req, res, next) {
     categoryService.create(req.body)
         .then((category) => res.status(201).json({
             id: category.id_cat,
-            message: 'Category created successfully'
+            message: 'Catégorie created successfully'
         }))
         .catch(next);
 }
