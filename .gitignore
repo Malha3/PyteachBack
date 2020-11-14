@@ -118,3 +118,5 @@ dist
 .idea/
 migrations/
 apidoc/
+config/config.json
+.env
