@@ -23,7 +23,7 @@ function courseSchema(req, res, next) {
         author_id: Joi.string().required(),
         tags: Joi.string().optional(),
         published: Joi.boolean().required(),
-        id_cat: Joi.string().required()
+        id_cat: Joi.number().required()
     });
     validateRequest(req, next, schema);
 }
@@ -36,7 +36,7 @@ function updateSchema(req, res, next) {
         author_id: Joi.string().empty(''),
         tags: Joi.string().empty(''),
         published: Joi.boolean().empty(''),
-        id_cat: Joi.string().empty('')
+        id_cat: Joi.number().empty('')
     });
     validateRequest(req, next, schema);
 }
