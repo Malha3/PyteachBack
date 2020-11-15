@@ -22,7 +22,7 @@ function articleSchema(req, res, next) {
         description: Joi.string().required(),
         id_course: Joi.number().required(),
         body: Joi.string().required(),
-        position: Joi.string().required(),
+        position: Joi.number().required(),
         imageUrl: Joi.string().optional(),
         videoUrl: Joi.string().optional(),
         isPublished: Joi.boolean().required(),
@@ -37,9 +37,9 @@ function updateSchema(req, res, next) {
         description: Joi.string().empty(''),
         id_course: Joi.number().empty(''),
         body: Joi.string().empty(''),
-        position: Joi.string().empty(''),
-        imageUrl: Joi.string().empty(''),
-        videoUrl: Joi.string().empty(''),
+        position: Joi.number().empty(''),
+        imageUrl: Joi.string().min(0).allow('').allow(null),
+        videoUrl: Joi.string().min(0).allow('').allow(null),
         isPublished: Joi.boolean().empty(''),
         isExercice: Joi.boolean().empty('')
     });
