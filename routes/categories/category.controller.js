@@ -4,7 +4,6 @@ const Joi = require('joi');
 const validateRequest = require('_middleware/validate-request');
 const authorize = require('_middleware/authorize')
 const categoryService = require('./category.service');
-const category = require('../../models/category');
 
 // Routes (sécurisé par token)
 router.post('/', authorize(), categorySchema, createCategory);

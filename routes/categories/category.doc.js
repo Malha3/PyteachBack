@@ -20,7 +20,7 @@
  /**
  * @api {get} /categories/ Get All Categories
  * @apiName GetAll
- * @apiGroup Categories
+ * @apiGroup Category
  * @apiHeader {String} JWT access token.
  *
  *
