@@ -1,7 +1,7 @@
 /**
- * @api {post} /articles/createOne Create Post
- * @apiName CreatePost
- * @apiGroup Post
+ * @api {post} /articles Create Article
+ * @apiName CreateArticle
+ * @apiGroup Article
  *
  * @apiExample Example usage:
  *     body:
@@ -20,44 +20,44 @@
  */
 
 /**
- * @api {get} /articles/ Get All Posts
+ * @api {get} /articles/ Get All Articles
  * @apiName GetAll
- * @apiGroup Post
+ * @apiGroup Article
  * @apiHeader {String} JWT access token.
  *
- * @apiSuccess {Json} PostsList  Json list of all Posts
+ * @apiSuccess {Json} ArticlesList  Json list of all Articles
  *
  */
 
 /**
- * @api {delete} /articles/:id Delete Post
- * @apiName DeletePost
- * @apiGroup Post
+ * @api {delete} /articles/:id Delete Article
+ * @apiName DeleteArticle
+ * @apiGroup Article
  * @apiHeader {String} JWT access token.
  *
- * @apiParam {Number} id Post unique ID.
+ * @apiParam {Number} id Article unique ID.
  *
  * @apiSuccess {String} message  Delete confirmation
  *
  */
 
 /**
- * @api {get} /posts/:id Request Post information
- * @apiName GetPost
- * @apiGroup Post
+ * @api {get} /articles/:id Request article information
+ * @apiName GetArticle
+ * @apiGroup Article
  * @apiHeader {String} JWT access token.
  *
- * @apiParam {Number} id Post unique ID.
+ * @apiParam {Number} id Article unique ID.
  *
- * @apiSuccess {Int} id_post id of the Post.
- * @apiSuccess {String} title Title of the Post.
- * @apiSuccess {String} description Description of the Post
- * @apiSuccess {String} body Body of the Post.
- * @apiSuccess {Int} position Position of the Post in Course.
- * @apiSuccess {String} imageUrl URL of image of the Post (can be null).
- * @apiSuccess {String} videoUrl URL of video of the Post (can be null).
- * @apiSuccess {Boolean} isExercice  True if this Post is Exercice.
- * @apiSuccess {Boolean} isPublished  True if this post is Published, false if it's a draft.
- * @apiSuccess {Int} id_course  ID of course where this post belongs to.
+ * @apiSuccess {Int} id_Article id of the Article.
+ * @apiSuccess {String} title Title of the Article.
+ * @apiSuccess {String} description Description of the Article
+ * @apiSuccess {String} body Body of the Article.
+ * @apiSuccess {Int} position Position of the Article in Course.
+ * @apiSuccess {String} imageUrl URL of image of the Article (can be null).
+ * @apiSuccess {String} videoUrl URL of video of the Article (can be null).
+ * @apiSuccess {Boolean} isExercice  True if this Article is Exercice.
+ * @apiSuccess {Boolean} isPublished  True if this Article is Published, false if it's a draft.
+ * @apiSuccess {Int} id_course  ID of course where this Article belongs to.
  *
  */
