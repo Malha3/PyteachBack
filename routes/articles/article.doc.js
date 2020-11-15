@@ -1,5 +1,5 @@
 /**
- * @api {post} /posts/createOne Create Post
+ * @api {post} /articles/createOne Create Post
  * @apiName CreatePost
  * @apiGroup Post
  *
@@ -20,7 +20,7 @@
  */
 
 /**
- * @api {get} /posts/ Get All Posts
+ * @api {get} /articles/ Get All Posts
  * @apiName GetAll
  * @apiGroup Post
  * @apiHeader {String} JWT access token.
@@ -30,7 +30,7 @@
  */
 
 /**
- * @api {delete} /posts/:id Delete Post
+ * @api {delete} /articles/:id Delete Post
  * @apiName DeletePost
  * @apiGroup Post
  * @apiHeader {String} JWT access token.
