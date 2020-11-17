@@ -38,8 +38,8 @@ function updateSchema(req, res, next) {
         id_course: Joi.number().empty(''),
         body: Joi.string().empty(''),
         position: Joi.number().empty(''),
-        imageUrl: Joi.string().min(0).allow('').allow(null),
-        videoUrl: Joi.string().min(0).allow('').allow(null),
+        imageUrl: Joi.string().empty(''),
+        videoUrl: Joi.string().empty(''),
         isPublished: Joi.boolean().empty(''),
         isExercice: Joi.boolean().empty('')
     });
