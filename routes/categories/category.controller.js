@@ -62,6 +62,6 @@ function getAll(req, res, next) {
 
 function getById(req, res, next) {
     categoryService.getById(req.params.id)
-        .then(user => res.json(user))
+        .then(category => res.json(category))
         .catch(next);
 }
