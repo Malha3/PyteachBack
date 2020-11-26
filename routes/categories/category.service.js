@@ -49,7 +49,6 @@ async function getById(id) {
 }
 
 async function getCategory(id) {
-    console.log(id);
     const category = await db.Category.findByPk(id);
     if (!category) throw 'Category not found';
     return category;
