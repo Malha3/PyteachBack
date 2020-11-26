@@ -63,7 +63,13 @@ async function _delete(id) {
 }
 
 async function getArticle(id) {
-    const article = await db.Article.findByPk(id);
+    const article = await db.Article.findByPk(id, {
+        include: [{
+            model: db.Course,
+            as: 'course'
+        }]
+    });
+
     if (!article) throw 'Article non trouvé';
     return article;
 }
