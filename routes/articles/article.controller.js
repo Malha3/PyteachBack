@@ -7,7 +7,7 @@ const articleService = require('./article.service');
 const Role = require('_helpers/role');
 
 // routes
-router.post('/', authorize(Role.Admin), articleSchema, createArticle);
+router.post('/', authorize([Role.Admin, Role.Teacher]), articleSchema, createArticle);
 router.get('/', authorize(), getAll);
 router.get('/:id', authorize(), getById);
 router.put('/:id', authorize(), updateSchema, update);
@@ -20,9 +20,9 @@ function articleSchema(req, res, next) {
     const schema = Joi.object({
         title: Joi.string().required(),
         description: Joi.string().required(),
-        id_course: Joi.string().required(),
+        id_course: Joi.number().required(),
         body: Joi.string().required(),
-        position: Joi.string().required(),
+        position: Joi.number().required(),
         imageUrl: Joi.string().optional(),
         videoUrl: Joi.string().optional(),
         isPublished: Joi.boolean().required(),
@@ -35,9 +35,9 @@ function updateSchema(req, res, next) {
     const schema = Joi.object({
         title: Joi.string().empty(''),
         description: Joi.string().empty(''),
-        id_course: Joi.string().empty(''),
+        id_course: Joi.number().empty(''),
         body: Joi.string().empty(''),
-        position: Joi.string().empty(''),
+        position: Joi.number().empty(''),
         imageUrl: Joi.string().empty(''),
         videoUrl: Joi.string().empty(''),
         isPublished: Joi.boolean().empty(''),

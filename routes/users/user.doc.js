@@ -17,7 +17,7 @@
  * @apiSuccess {String} lastName  Lastname of the User.
  * @apiSuccess {String} username  username of the User.
  * @apiSuccess {String} role  role of the User.
- * @apiSuccess {String} email  Lastname of the User.
+ * @apiSuccess {String} email  email of the User.
  *
  */
 
@@ -63,7 +63,7 @@
  * @apiSuccess {String} lastName  Lastname of the User.
  * @apiSuccess {String} username  username of the User.
  * @apiSuccess {String} role  role of the User.
- * @apiSuccess {String} email  Lastname of the User.
+ * @apiSuccess {String} email  email of the User.
  *
  */
 
@@ -80,7 +80,7 @@
  * @apiSuccess {String} lastName  Lastname of the User.
  * @apiSuccess {String} username  username of the User.
  * @apiSuccess {String} role  role of the User.
- * @apiSuccess {String} email  Lastname of the User.
+ * @apiSuccess {String} email  email of the User.
  *
  */
 
@@ -117,6 +117,6 @@
  * @apiSuccess {String} lastName  Lastname of the User.
  * @apiSuccess {String} username  username of the User.
  * @apiSuccess {String} role  role of the User.
- * @apiSuccess {String} email  Lastname of the User.
+ * @apiSuccess {String} email  email of the User.
  *
  */
