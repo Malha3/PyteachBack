@@ -73,7 +73,11 @@ function update(req, res, next) {
 
 function completeArticle(req, res, next) {
     articleService.complete(req.body.id_article, req.body.id_user)
-        .then(article => res.json(article))
+        .then(article => res.status(201).json({
+            id_article: req.body.id_article,
+            id_user: req.body.id_user,
+            message: 'User completed article successfully'
+        }))
         .catch(next);
 }
 
