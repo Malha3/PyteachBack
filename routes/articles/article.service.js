@@ -1,5 +1,7 @@
 const bcrypt = require('bcryptjs');
 const db = require('models/');
+const Sequelize = require('sequelize');
+const Op = Sequelize.Op;
 
 module.exports = {
     getAll,
@@ -71,5 +73,26 @@ async function getArticle(id) {
     });
 
     if (!article) throw 'Article non trouvé';
+
+    const previousArticle = await db.Article.findOne({
+        where: {
+            id_course: article.id_course,
+            position: {
+                [Op.lt]: article.position,
+            }
+        }
+    });
+
+    const nextArticle = await db.Article.findOne({
+        where: {
+            id_course: article.id_course,
+            position: {
+                [Op.gt]: article.position,
+            }
+        }
+    });
+
+    if(previousArticle !== null) article.setDataValue("previousArticle", previousArticle.id_article);
+    if(nextArticle !== null) article.setDataValue("nextArticle", nextArticle.id_article);
     return article;
 }
