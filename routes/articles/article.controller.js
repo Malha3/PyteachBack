@@ -8,6 +8,7 @@ const Role = require('_helpers/role');
 
 // routes
 router.post('/', authorize([Role.Admin, Role.Teacher]), articleSchema, createArticle);
+router.post('/complete', authorize(), completeSchema, completeArticle);
 router.get('/', authorize(), getAll);
 router.get('/:id', authorize(), getById);
 router.put('/:id', authorize(), updateSchema, update);
@@ -27,6 +28,14 @@ function articleSchema(req, res, next) {
         videoUrl: Joi.string().optional(),
         isPublished: Joi.boolean().required(),
         isExercice: Joi.boolean().required(),
+    });
+    validateRequest(req, next, schema);
+}
+
+function completeSchema(req, res, next) {
+    const schema = Joi.object({
+        id_article: Joi.number().required(),
+        id_user: Joi.number().required()
     });
     validateRequest(req, next, schema);
 }
@@ -58,7 +67,13 @@ function createArticle(req, res, next) {
 
 function update(req, res, next) {
     articleService.update(req.params.id, req.body)
-        .then(category => res.json(category))
+        .then(article => res.json(article))
+        .catch(next);
+}
+
+function completeArticle(req, res, next) {
+    articleService.complete(req.body.id_article, req.body.id_user)
+        .then(article => res.json(article))
         .catch(next);
 }
 
