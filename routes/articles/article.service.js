@@ -1,11 +1,14 @@
 const bcrypt = require('bcryptjs');
 const db = require('models/');
+const Sequelize = require('sequelize');
+const Op = Sequelize.Op;
 
 module.exports = {
     getAll,
     getById,
     create,
     update,
+    complete,
     delete: _delete
 };
 
@@ -57,13 +60,58 @@ async function update(id, params) {
     return article.get();
 }
 
+async function complete(articleId, userId) {
+    const article = await getArticle(articleId);
+    const user = await getUser(userId);
+
+    if (!article) throw 'Article non trouvé';
+    if (!user) throw 'Utilisateur non trouvé';
+
+    article.addUser(user);
+    return article
+}
+
 async function _delete(id) {
     const article = await getArticle(id);
     await article.destroy();
 }
 
+// Getters
 async function getArticle(id) {
-    const article = await db.Article.findByPk(id);
+    const article = await db.Article.findByPk(id, {
+        include: [{
+            model: db.Course,
+            as: 'course'
+        }]
+    });
+
     if (!article) throw 'Article non trouvé';
+
+    const previousArticle = await db.Article.findOne({
+        where: {
+            id_course: article.id_course,
+            position: {
+                [Op.lt]: article.position,
+            }
+        }
+    });
+
+    const nextArticle = await db.Article.findOne({
+        where: {
+            id_course: article.id_course,
+            position: {
+                [Op.gt]: article.position,
+            }
+        }
+    });
+
+    if(previousArticle !== null) article.setDataValue("previousArticle", previousArticle.id_article);
+    if(nextArticle !== null) article.setDataValue("nextArticle", nextArticle.id_article);
     return article;
+}
+
+async function getUser(id) {
+    const user = await db.User.findByPk(id);
+    if (!user) throw 'User not found';
+    return user;
 }

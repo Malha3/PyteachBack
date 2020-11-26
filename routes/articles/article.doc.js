@@ -20,6 +20,22 @@
  */
 
 /**
+ * @api {post} /articles/complete Complete Article
+ * @apiName CompleteArticle
+ * @apiGroup Article
+ *
+ * @apiExample Example usage:
+ *     body:
+ *        {
+ *          "id_article": "1",
+ *          "id_user": "1"
+ *       }
+ *
+ * @apiSuccess (Success 201) {String} message  User completed article confirmation.
+ *
+ */
+
+/**
  * @api {get} /articles/ Get All Articles
  * @apiName GetAll
  * @apiGroup Article

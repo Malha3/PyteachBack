@@ -14,6 +14,9 @@ module.exports = (sequelize, DataTypes) => {
         as: 'course',
         foreignKey: 'id_course'
       });
+      Article.belongsToMany(models.User, {
+        through: 'CompletedArticles'
+      });
       // define association here
     }
   };

@@ -45,10 +45,11 @@ async function getAll() {
 }
 
 async function getById(id) {
-    return await getUser(id);
+    return await getCategory(id);
 }
 
 async function getCategory(id) {
+    console.log(id);
     const category = await db.Category.findByPk(id);
     if (!category) throw 'Category not found';
     return category;
