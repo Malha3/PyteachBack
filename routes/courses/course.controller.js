@@ -11,6 +11,7 @@ router.post('/', authorize([Role.Admin, Role.Teacher]), courseSchema, createCour
 router.post('/suivre', authorize(), suivreSchema, suivreCourse);
 router.get('/', authorize(), getAll);
 router.get('/:id', authorize(), getById);
+router.get('/suivis/:userId', authorize(), getCoursSuivi);
 router.put('/:id', authorize([Role.Admin, Role.Teacher]), updateSchema, update);
 router.delete('/:id', authorize([Role.Admin, Role.Teacher]), _delete);
 
@@ -92,5 +93,11 @@ function getAll(req, res, next) {
 function getById(req, res, next) {
     courseService.getById(req.params.id)
         .then(course => res.json(course))
+        .catch(next);
+}
+
+function getCoursSuivi(req, res, next) {
+    courseService.getCoursSuivi(req.params.userId)
+        .then(courses => res.json(courses))
         .catch(next);
 }

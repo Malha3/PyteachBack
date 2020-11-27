@@ -4,6 +4,7 @@ const slugify = require('_helpers/slugify')
 
 module.exports = {
     getAll,
+    getCoursSuivi,
     getBySlug,
     getById,
     create,
@@ -24,6 +25,20 @@ async function getAll() {
             attributes: ['firstName', 'lastName']
         },
         ]
+    });
+}
+
+async function getCoursSuivi(userId) {
+    return await db.User.findByPk(userId, {
+        include: [{
+            model: db.Course,
+            as: 'followed_courses',
+            attributes: ['id_course', 'title'],
+            through: {
+                attributes: []
+            }
+        }],
+        attributes: ['id']
     });
 }
 

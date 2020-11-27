@@ -19,7 +19,8 @@ module.exports = (sequelize, DataTypes) => {
         foreignKey: 'author_id'
       });
       Course.belongsToMany(models.User, {
-        through: 'FollowedCourses'
+        through: 'FollowedCourses',
+        as: 'followers'
       });
       Course.hasMany(models.Article, {
         as: 'exercices',
