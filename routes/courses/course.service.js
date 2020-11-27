@@ -8,6 +8,7 @@ module.exports = {
     getById,
     create,
     update,
+    suivre,
     delete: _delete
 };
 
@@ -72,6 +73,17 @@ async function update(id, params) {
     return course.get();
 }
 
+async function suivre(courseId, userId) {
+    const course = await getCourse(courseId);
+    const user = await getUser(userId);
+
+    if (!course) throw 'Cours non trouvé';
+    if (!user) throw 'Utilisateur non trouvé';
+
+    course.addUser(user);
+    return course
+}
+
 async function _delete(id) {
     const course = await getCourse(id);
     await course.destroy();
@@ -89,7 +101,8 @@ async function getCourse(id) {
     return course;
 }
 
-function omitHash(user) {
-    const { hash, ...userWithoutHash } = user;
-    return userWithoutHash;
+async function getUser(id) {
+    const user = await db.User.findByPk(id);
+    if (!user) throw 'User not found';
+    return user;
 }

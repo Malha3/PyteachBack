@@ -8,6 +8,7 @@ const Role = require('_helpers/role');
 
 // routes
 router.post('/', authorize([Role.Admin, Role.Teacher]), courseSchema, createCourse);
+router.post('/suivre', authorize(), suivreSchema, suivreCourse);
 router.get('/', authorize(), getAll);
 router.get('/:id', authorize(), getById);
 router.put('/:id', authorize([Role.Admin, Role.Teacher]), updateSchema, update);
@@ -25,6 +26,14 @@ function courseSchema(req, res, next) {
         tags: Joi.string().optional(),
         published: Joi.boolean().required(),
         id_cat: Joi.number().required()
+    });
+    validateRequest(req, next, schema);
+}
+
+function suivreSchema(req, res, next) {
+    const schema = Joi.object({
+        id_course: Joi.number().required(),
+        id_user: Joi.number().required()
     });
     validateRequest(req, next, schema);
 }
@@ -54,6 +63,16 @@ function createCourse(req, res, next) {
 function update(req, res, next) {
     courseService.update(req.params.id, req.body)
         .then(course => res.json(course))
+        .catch(next);
+}
+
+function suivreCourse(req, res, next) {
+    courseService.suivre(req.body.id_course, req.body.id_user)
+        .then(course => res.status(201).json({
+            id_course: req.body.id_course,
+            id_user: req.body.id_user,
+            message: 'User follows course successfully'
+        }))
         .catch(next);
 }
 
