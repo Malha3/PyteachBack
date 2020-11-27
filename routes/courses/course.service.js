@@ -12,7 +12,12 @@ module.exports = {
 };
 
 async function getAll() {
-    return await db.Course.findAll();
+    return await db.Course.findAll({
+        include: [{
+            model: db.Category,
+            as: 'category'
+        }]
+    });
 }
 
 async function getById(id) {

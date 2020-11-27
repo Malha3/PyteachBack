@@ -11,8 +11,8 @@ router.post('/', authorize([Role.Admin, Role.Teacher]), articleSchema, createArt
 router.post('/complete', authorize(), completeSchema, completeArticle);
 router.get('/', authorize(), getAll);
 router.get('/:id', authorize(), getById);
-router.put('/:id', authorize(), updateSchema, update);
-router.delete('/:id', authorize(), _delete);
+router.put('/:id', authorize([Role.Admin, Role.Teacher]), updateSchema, update);
+router.delete('/:id', authorize([Role.Admin, Role.Teacher]), _delete);
 
 module.exports = router;
 
