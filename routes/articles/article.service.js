@@ -93,7 +93,8 @@ async function getArticle(id) {
             position: {
                 [Op.lt]: article.position,
             }
-        }
+        },
+        order: [[ 'position', 'DESC' ]]
     });
 
     const nextArticle = await db.Article.findOne({
@@ -102,7 +103,8 @@ async function getArticle(id) {
             position: {
                 [Op.gt]: article.position,
             }
-        }
+        },
+        order: [[ 'position', 'ASC' ]]
     });
 
     if(previousArticle !== null) article.setDataValue("previousArticle", previousArticle.id_article);
