@@ -1,18 +1,40 @@
-# PyteachBack
+<p align="center">
+  <a href="https://github.com/meddouribadis/pyteach-front">
+    <img src="https://ammib2018.sciencesconf.org/data/pages/logoUEVE.jpg" alt="Logo" width="430">
+  </a>
+</p>
 
-- [PyteachBack](#pyteachback)
-  * [Installation](#installation)
-  * [Usage](#usage)
-    + [Auth](#auth)
-  * [Auteurs](#auteurs)
+  <h3 align="center">Projet AOS : PyTeach Serveur API</h3>
+
+  <p align="center">
+    Professeur : <strong>Franck Ledoux</strong>
+    <br />
+    <a href="https://github.com/meddouribadis/pyteach-front">Lien vers le repo front</a>
+    ·
+    <a href="https://github.com/meddouribadis/DLL_CasContact_Front/issues">Report a bug</a>
+  </p>
+
+- [A propos du projet](#a-propos-du-projet)
+- [Swagger](#swagger)
+- [Auteurs](#auteurs)
+
+## A propos du projet
+
+#### Le serveur est basée sur les technologies suivantes :
+
+* [Express](https://expressjs.com/fr/)
+* [Sequelize](https://sequelize.org/)
+* [APIDoc](https://apidocjs.com/)
+* [cors](https://www.npmjs.com/package/cors)
+* [joi](https://github.com/sideway/joi)
 
 ## Installation
 
-Clone this repo !
+Clonez ce repository et installez les dépendances à l'aide des commandes suivantes :
 
-Run `npm install` then `npm install` inside a terminal.
+`npm install` et `npm install` 
 
-Tweak the `./.env` file :
+Modifiez le fichier `.env` à la racine pour le faire pointer sur votre base de donnée locale :
 
 ```
 PORT=4040
@@ -23,7 +45,7 @@ DB_PASS=covid19
 DB_HOST=localhost
 ```
 
-Update the `./config/config.json` file with our MySQL databases informations :
+Modifiez également le fichier `/config/config.json` avec vos informations de base de données :
 
 ```json
 {
@@ -39,52 +61,19 @@ Update the `./config/config.json` file with our MySQL databases informations :
 
 ```
 
-Start your MySQL server and then start the API via the command `npm test`or with the `node app.js` command.
+Assurez vous que votre serveur SQL est bien démarré puis lancez le projet à l'aide de la commande : `npm start`
 
-That's All.
+## Swagger
 
-## Usage
+Pour générer le Swagger, il suffit d'installer APIDoc à l'aide de la commande suivante :
 
-### Auth
+`npm install apidoc -g`
 
-To register : POST http://localhost:4040/users/register
+et de générer la documentation à la racine de ce projet avec la commande :
 
-```json
-{
-    "firstName": "Jason",
-    "lastName": "Patrick",
-    "username": "username",
-    "email": "mail@gmail.com",
-    "password": "my-passwd"
-}
-```
+`apidoc -i routes/ -o apidoc/`
 
-To login : POST http://localhost:4040/users/login
-
-```json
-{
-    "username": "jajson",
-    "password": "my-super-secret-password"
-}
-```
-
- will return a user informations as well as a JWT token :
-
-```json
-{
-    "id": 1,
-    "firstName": "Jason",
-    "lastName": "Patrick",
-    "username": "username",
-    "role": "STUDENT",
-    "email": "randommail@gmail.com",
-    "createdAt": "2020-09-26T15:22:05.000Z",
-    "updatedAt": "2020-09-26T15:22:05.000Z",
-    "token": "token"
-}
-```
-### CRUD Table
-Use apidoc command to generate the API Swagger : `apidoc -f "routes/.*\\.js$" -i ./  -o apidoc/`
+Une fois générée, le Swagger se trouve à l'adresse suivante : http://localhost:4040/apidoc
 
 ## Auteurs
 
