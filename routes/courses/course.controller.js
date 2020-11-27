@@ -4,13 +4,16 @@ const Joi = require('joi');
 const validateRequest = require('_middleware/validate-request');
 const authorize = require('_middleware/authorize')
 const courseService = require('./course.service');
+const Role = require('_helpers/role');
 
 // routes
-router.post('/', courseSchema, createCourse);
+router.post('/', authorize([Role.Admin, Role.Teacher]), courseSchema, createCourse);
+router.post('/suivre', authorize(), suivreSchema, suivreCourse);
 router.get('/', authorize(), getAll);
 router.get('/:id', authorize(), getById);
-router.put('/:id', authorize(), updateSchema, update);
-router.delete('/:id', authorize(), _delete);
+router.get('/suivis/:userId', authorize(), getCoursSuivi);
+router.put('/:id', authorize([Role.Admin, Role.Teacher]), updateSchema, update);
+router.delete('/:id', authorize([Role.Admin, Role.Teacher]), _delete);
 
 module.exports = router;
 
@@ -24,6 +27,14 @@ function courseSchema(req, res, next) {
         tags: Joi.string().optional(),
         published: Joi.boolean().required(),
         id_cat: Joi.number().required()
+    });
+    validateRequest(req, next, schema);
+}
+
+function suivreSchema(req, res, next) {
+    const schema = Joi.object({
+        id_course: Joi.number().required(),
+        id_user: Joi.number().required()
     });
     validateRequest(req, next, schema);
 }
@@ -56,6 +67,16 @@ function update(req, res, next) {
         .catch(next);
 }
 
+function suivreCourse(req, res, next) {
+    courseService.suivre(req.body.id_course, req.body.id_user)
+        .then(course => res.status(201).json({
+            id_course: req.body.id_course,
+            id_user: req.body.id_user,
+            message: 'User follows course successfully'
+        }))
+        .catch(next);
+}
+
 function _delete(req, res, next) {
     courseService.delete(req.params.id)
         .then(() => res.json({ message: 'course deleted successfully' }))
@@ -72,5 +93,11 @@ function getAll(req, res, next) {
 function getById(req, res, next) {
     courseService.getById(req.params.id)
         .then(course => res.json(course))
+        .catch(next);
+}
+
+function getCoursSuivi(req, res, next) {
+    courseService.getCoursSuivi(req.params.userId)
+        .then(courses => res.json(courses))
         .catch(next);
 }

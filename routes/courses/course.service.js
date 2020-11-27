@@ -4,15 +4,42 @@ const slugify = require('_helpers/slugify')
 
 module.exports = {
     getAll,
+    getCoursSuivi,
     getBySlug,
     getById,
     create,
     update,
+    suivre,
     delete: _delete
 };
 
 async function getAll() {
-    return await db.Course.findAll();
+    return await db.Course.findAll({
+        include: [{
+            model: db.Category,
+            as: 'category',
+            attributes: ['title']
+        }, {
+            model: db.User,
+            as: 'author',
+            attributes: ['firstName', 'lastName']
+        },
+        ]
+    });
+}
+
+async function getCoursSuivi(userId) {
+    return await db.User.findByPk(userId, {
+        include: [{
+            model: db.Course,
+            as: 'followed_courses',
+            attributes: ['id_course', 'title'],
+            through: {
+                attributes: []
+            }
+        }],
+        attributes: ['id']
+    });
 }
 
 async function getById(id) {
@@ -61,6 +88,17 @@ async function update(id, params) {
     return course.get();
 }
 
+async function suivre(courseId, userId) {
+    const course = await getCourse(courseId);
+    const user = await getUser(userId);
+
+    if (!course) throw 'Cours non trouvé';
+    if (!user) throw 'Utilisateur non trouvé';
+
+    course.addUser(user);
+    return course
+}
+
 async function _delete(id) {
     const course = await getCourse(id);
     await course.destroy();
@@ -78,7 +116,8 @@ async function getCourse(id) {
     return course;
 }
 
-function omitHash(user) {
-    const { hash, ...userWithoutHash } = user;
-    return userWithoutHash;
+async function getUser(id) {
+    const user = await db.User.findByPk(id);
+    if (!user) throw 'User not found';
+    return user;
 }

@@ -14,6 +14,10 @@ module.exports = (sequelize, DataTypes) => {
         foreignKey: 'author_id',
         as: 'courses'
       });
+      User.belongsToMany(models.Course, {
+        as: 'followed_courses',
+        through: 'FollowedCourses'
+      });
       // define association here
     }
   };
